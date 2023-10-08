@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 MODEL_PATH = '../models/unet.pth'  # You can change this path if necessary
 
-model = UNet().to(device)
+model = ...
 model.load_state_dict(torch.load(MODEL_PATH, map_location=device))
 model.eval()
 
@@ -24,16 +24,13 @@ transform = transforms.Compose([
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    img_binary = request.data
-    img_pil = Image.open(io.BytesIO(img_binary))
+    ...
+    ...
+    ...
 
-    # Transform the PIL image
-    tensor = transform(img_pil).to(device)
-    tensor = tensor.unsqueeze(0)  # Add batch dimension
 
-    # Make prediction
     with torch.no_grad():
-        outputs = model(tensor)
+        outputs = model(...)
 
     # Convert the prediction to a PIL Image
     pred_img = transforms.ToPILImage()(outputs.squeeze().cpu())
